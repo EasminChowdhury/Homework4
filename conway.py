@@ -1,9 +1,20 @@
-#This function places the "Glider" pattern or any other known configuration from the Wikipedia page near the middle in the grid.
+
+
 def center_grid(grid_size, configuration):
+'''
+This function places the "Glider" pattern or any other known configuration from the Wikipedia page near the middle of the grid.
+Input: grid_size = 20
+       glider = np.array([[0, 1, 0], [0, 0, 1], [1, 1, 1]])
+       configuration = glider
+
+Output: a 20*20 matrix where the glider pattern is placed in the middle
+''' 
+    grid = np.zeros((grid_size, grid_size))
     x_start = (grid_size - configuration.shape[0]) // 2
     y_start = (grid_size - configuration.shape[1]) // 2
     grid[x_start:x_start + configuration.shape[0], y_start:y_start + configuration.shape[1]] = configuration
     return grid
+    
 
 def evolve(grid):  #The function updates the grid based on the rules of the game. 0 represents cells that are dead and 1 represents cells that are alive
     new_grid = np.zeros((grid_size, grid_size))
