@@ -17,7 +17,7 @@ s = np.array([1/6 , 1/6, 1/6, 1/6, 1/6, 1/6])
 diff= float("inf")
 threshold = 1e-6
 iteration = 0
-α = 1
+α = 0.85
 
 # Lists to store values of r and iteration
 r_values = [] # I dont think this includes the initial R
