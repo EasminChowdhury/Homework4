@@ -12,7 +12,7 @@ print("-" * 70)
 
 #PageRank Iteration:
 r = np.array([1/6 , 1/6, 1/6, 1/6, 1/6, 1/6]) # This represents the initial rank of the pages
-s = np.array([1/6 , 1/6, 1/6, 1/6, 1/6, 1/6])
+s = np.array([1/6 , 1/6, 1/6, 1/6, 1/6, 1/6]) 
 
 diff= float("inf")
 threshold = 1e-6
@@ -23,7 +23,7 @@ iteration = 0
 r_values = [] 
 iteration_values = []
 
-while diff >= threshold:
+while diff >= threshold: # while the difference between the consecutive r's is greater than the threshold, the function will continue to update the r
       r_prime = (α * M @ r) + ((1-α) * s) # r′ = αMr + (1−α)s where α is 0.85 ,
       diff = np.max(abs(r_prime - r)) #
       r = (r_prime)
@@ -35,7 +35,7 @@ while diff >= threshold:
 # Create a plot to visualize the r values over iterations
 plt.figure(figsize=(8, 6))
 for i in range(len(r_values[0])):
-    plt.plot(iteration_values, [r[i] for r in r_values], label=f'Page {i + 1}')
+    plt.plot(iteration_values, [r_values[j][i] for j in range(len(r_values))], label=f'Page {i + 1}')
 
 plt.xlabel('Iteration')
 plt.ylabel('PageRank Value')
@@ -45,7 +45,7 @@ plt.grid(True)
 plt.show()
 print("-" * 70)
 
-#Analysis: Compare the PageRank results with the eigenvector of M corresponding to the largest eigenvalue. They should be closely related.
+#Analysis: Compare the PageRank results with the eigenvector of M corresponding to the largest eigenvalue. 
 eigenvalues, eigenvectors = np.linalg.eig(M) # eigenvalues and eigenvectors of M
 largest_eigenvalue_index = np.argmax(eigenvalues) # index of the largest eigenvalue of M
 eigenvector = eigenvectors[:, largest_eigenvalue_index] # eigenvector corresponding to the largest eigenvalue of M
