@@ -20,14 +20,13 @@ iteration = 0
 α = 0.85
 
 # Lists to store values of r and iteration
-r_values = [] # I dont think this includes the initial R
+r_values = [] 
 iteration_values = []
 
 while diff >= threshold:
       r_prime = (α * M @ r) + ((1-α) * s) # r′ = αMr + (1−α)s where α is 0.85 ,
       diff = np.max(abs(r_prime - r)) #
       r = (r_prime)
-      r = r / np.linalg.norm(r)
       iteration += 1
 
       r_values.append(r.copy())  # Store a copy of r at each iteration
@@ -46,7 +45,7 @@ plt.grid(True)
 plt.show()
 print("-" * 70)
 
-#Analysis: Compare the PageRank results with the eigenvector of M corresponding to the largest eigenvalue.They should be closely related.
+#Analysis: Compare the PageRank results with the eigenvector of M corresponding to the largest eigenvalue. They should be closely related.
 eigenvalues, eigenvectors = np.linalg.eig(M) # eigenvalues and eigenvectors of M
 largest_eigenvalue_index = np.argmax(eigenvalues) # index of the largest eigenvalue of M
 eigenvector = eigenvectors[:, largest_eigenvalue_index] # eigenvector corresponding to the largest eigenvalue of M
@@ -55,4 +54,4 @@ normalized_eigenvector = eigenvector / magnitude # Normalize the eigenvector by 
 real_eigenvector = np.real(normalized_eigenvector) # Get the real part of the complex eigenvector
 
 print("eigenvector of M corresponding to the largest eigenvalue is ", real_eigenvector)
-print("PageRank Results:", r_values[-1])
+print("PageRank Results:", r_values[-1] / np.linalg.norm(r_values[-1]))
