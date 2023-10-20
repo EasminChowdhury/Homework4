@@ -41,6 +41,8 @@ def game_of_life(k):
         im.set_data(grid) #This creates an image after the evolve function has been iterated 10 times.
         return im, #returns the image to use in the animation 
 
+    final_frame = grid.copy() # Create a snapshot of the last frame
+    
     # Create a gif of the evolution from the initial state to the final state at a frame rate of 10 frames per second. There are k/10 frames since the image above shows every tenth step
     ani = animation.FuncAnimation(fig, update, frames=int(k/10), interval=10, blit=True, repeat=False)
 
@@ -49,6 +51,10 @@ def game_of_life(k):
 
     # save the animation as a GIF
     ani.save('game_of_life.gif', writer=writer)
+
+    # Save the final frame as an image (game_of_life.png)
+    fig.set_size_inches(10,10)
+    plt.imsave("game_of_life.png", final_frame, cmap='gray', vmin=0, vmax=1)
 
     # close the plot window
     plt.close()
